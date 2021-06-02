@@ -1,15 +1,19 @@
-import express, { Request, Response } from 'express'
-import bodyParser from 'body-parser'
+import express from 'express';
+import user_routes from './handlers/users';
+import product_routes from './handlers/products'
+import order_routes from './handlers/orders';
 
-const app: express.Application = express()
-const address: string = "0.0.0.0:3000"
+const app: express.Application = express();
 
-app.use(bodyParser.json())
+app.use(express.json());
 
-app.get('/', function (req: Request, res: Response) {
-    res.send('Hello World!')
-})
 
-app.listen(3000, function () {
-    console.log(`starting app on: ${address}`)
-})
+app.listen(3000);
+console.log("Listening on port - "+3000);
+
+user_routes(app);
+product_routes(app);
+order_routes(app);
+
+
+export default app;
